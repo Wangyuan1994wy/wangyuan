@@ -174,6 +174,7 @@ sjt.frq(cgss2003$sitetype)
 
 ## 如何使用label信息:1-使用sjPlot包分析
 ```{r,fig.height= 4}
+library(sjPlot)
 sjp.setTheme(theme.font ='STXihei' ) # STHeiti也可
 cgss2003  %>% select(sitetype) %>%  sjplot(fun="frq")
 ```
@@ -184,6 +185,7 @@ cgss2003  %>% select(sitetype) %>%  sjplot(fun="frq")
 ## 如何使用label信息:2-转换为因子
 使用haven包的as_factor()命令可以将所有labelled的列变成因子。
 ```{r,fig.height=2.5}
+library(haven)
 cgss2003  %>%
   filter(sitetype>0) %>%
   select(sitetype) %>% 
@@ -371,8 +373,7 @@ ggplot(table1, aes(year, cases)) +
 
 ## 宽数据变长数据
 使用`gather`命令
-
-原变量名列表归为新变量key=,取值归入新变量value=
+key=变量名,value=取值
 
 ```{r}
 table4a %>% 
@@ -392,7 +393,7 @@ table2
 ```
 
 ##  长数据变宽数据
-使用`spread`命令，变量名key来自什么，取值value来自于什么
+使用`spread`命令，变量名key，取值value
 ```{r}
 spread(table2, key = type, value = count)
 ```
@@ -429,13 +430,13 @@ health_long[1:15, ]
 
 ## tidy方式：变宽(练习)
 ```{r,eval=FALSE}
-spread(health, key = ?, value = ?) # key is the identifier
+spread(health, key = trial, value = score ) # key is the identifier
 ```
 
-## tidy方式：变长(练习)
+## tidy方式：变长(练习)??????????
 ```{r,eval=FALSE}
 # can also reference by column number(2:5)
-gather(health_wide, key = ?, value = ?, score.1:score.4) 
+health <- gather(health_wide, key = id , value =score , score.1:score.4) 
 ```
 
 ## 其他数据整理命令
