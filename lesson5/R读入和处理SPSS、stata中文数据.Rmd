@@ -106,7 +106,7 @@ cgss2003  %>% select(sitetype) %>%  sjplot(fun="frq")
 Daniel开发的 sjlabelled包中还有一些专门处理标签信息的函数，例如获得标签
 ```{r,eval=FALSE}
 sjlabelled::get_labels(cgss2003$sitetype,include.values="n")
-
+#处理标签
 sjlabelled::set_labels(cgss2003$sitetype,
                        labels=c("不适合"="-3",
                                 "无填答/不回答"="-2",
