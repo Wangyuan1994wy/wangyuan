@@ -597,10 +597,37 @@ findInterval也可以分组，左闭区间。cut默认是右闭。
 -  参考老师课件中插入图片的格式，将你上面截取的图片插入rmarkdown文件中，作为第一题的答案。你可以加上简单的说明。
 - 校内登录中国国家调查数据库注册和下载stata14或spss版本的CGSS数据 http://www.cnsda.org/index.php?r=projects/view&id=93281139
 - 参考老师的课件，将该数据读入R，然后完成下面的问题：
+
   + 这个数据有多少个观察案例？多少个变量？
   + 变量a10是政治面貌变量，请问调查数据中中共党员有多少人？
   + 尝试将政治面貌的条形图做出来。
+```{r}
+library(haven)
+setwd("/Users/wangyuan/Documents/GitHub/personal/homework")
+cgss2013 <- read_dta("cgss2013_14.dta")
+#使用sjPlot
+library(sjPlot)
 
+sjt.frq(cgss2013$a10) #仍然存在拒绝回答和不知道
+#使用haven
+library(dplyr)
+library(ggplot2)
+cgss2013 <- cgss2013  %>%
+  filter(a10 >0) %>%
+  select(a10) %>% 
+  haven::as_factor() %>% 
+  droplevels()
+
+
+cgss2013%>% 
+  sjplot(fun="frq",axis.title="政治面貌")
+
+ggplot(data=cgss2013)+
+  geom_bar(mapping=aes(x=a10)) 
+
+
+
+```
 *注意:*读入和解答过程应该在Rmarkdown文件中有所体现。最终Knit成为一个doc文件,最为附件发送到liding@ruc.edu.cn。文件名和邮件标题都统一为“R第一作业20110102李丁.doc”的样式。下周三0点前提交。
 
 

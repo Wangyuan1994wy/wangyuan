@@ -538,7 +538,7 @@ p + stat_smooth() ## 平滑散点图
 #课堂练习：下面的图，如果变成两条拟合曲线，怎么做？)
 p<-ggplot(data=mpg,mapping=aes(x=cty,y=hwy)) +
 	geom_point(aes(colour=factor(year))) +
-	stat_smooth()
+	stat_smooth(aes(colour=factor(year)))
 print(p)
 
 # 如何来控制Scale 标度 呈现样式
@@ -709,7 +709,7 @@ ggplot(dat, aes(x,y)) + geom_point() +
   geom_text(data = dat[dat$label == "g" ,], aes(x,y, label = label), hjust = 2)
 
 
-
+library(dplyr)
 perc.rank <- function(x) trunc(rank(x))/length(x)
 my.df <- iris
 my.df <- within(my.df, xr <- perc.rank(Sepal.Width))
